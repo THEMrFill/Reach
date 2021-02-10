@@ -1,11 +1,10 @@
 package com.reach.philip.arnold.repo
 
 import com.reach.philip.arnold.model.Product
-import io.realm.RealmList
 
 object PopulateProducts {
-    fun makePoducts(): RealmList<Product> {
-        val products = RealmList<Product>()
+    fun makePoducts(): ArrayList<Product> {
+        val products = ArrayList<Product>()
         /*
         val product1 = Product(
             id = "LIPSTICK",

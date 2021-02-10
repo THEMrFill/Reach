@@ -3,7 +3,6 @@ package com.reach.philip.arnold.repo
 import androidx.lifecycle.MutableLiveData
 import com.reach.philip.arnold.domain.BasketLogic
 import com.reach.philip.arnold.model.*
-import io.realm.RealmList
 
 class BasketRepositoryImpl(val storageRepo: StorageRepository): BasketRepository {
     override fun getCount(productId: String, countData: MutableLiveData<Int>) {
@@ -19,25 +18,22 @@ class BasketRepositoryImpl(val storageRepo: StorageRepository): BasketRepository
 
     override fun add(quantity: Int, productId: String) {
         val cart = getCart()
-        val newCartItems = RealmList<CartItem>()
         var itemAdded = false
         for (item in cart.cart) {
-            val newItem = CartItem(quantity = item.quantity, product = item.product)
-            if (newItem.product == productId) {
-                newItem.quantity += quantity
+            if (item.product == productId) {
+                item.quantity += quantity
                 itemAdded = true
             }
-            newCartItems.add(newItem)
         }
         if (!itemAdded) {
-            newCartItems.add(CartItem(quantity = quantity, product = productId))
+            cart.cart.add(CartItem(quantity = quantity, product = productId))
         }
-        storageRepo.saveCart(Cart(newCartItems))
+        storageRepo.saveCart(cart)
     }
 
     override fun remove(quantity: Int, productId: String) {
         val cart = getCart()
-        val newCartItems = RealmList<CartItem>()
+        val newCartItems = ArrayList<CartItem>()
         for (item in cart.cart) {
             val newItem = CartItem(quantity = item.quantity, product = item.product)
             if (newItem.product == productId) {

@@ -6,14 +6,13 @@ import com.reach.philip.arnold.model.Cart
 import com.reach.philip.arnold.model.CartItem
 import com.reach.philip.arnold.model.Discount
 import com.reach.philip.arnold.model.Product
-import io.realm.RealmList
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.mockito.Mockito
 
 class FullBasketTests {
-    private val discounts = RealmList<Discount>()
-    private val products = RealmList<Product>()
+    private val discounts = ArrayList<Discount>()
+    private val products = ArrayList<Product>()
     init {
         discounts.add(
             Discount(
@@ -64,7 +63,7 @@ class FullBasketTests {
 
     @Test
     fun `check small basket`() {
-        val cartItems = RealmList<CartItem>()
+        val cartItems = ArrayList<CartItem>()
         cartItems.add(CartItem("SHAMPOO", 2))
         Mockito.`when`(storage.loadCart()).thenReturn(Cart(cartItems))
         // 35.5 * 2
@@ -75,7 +74,7 @@ class FullBasketTests {
 
     @Test
     fun `large number of items without a discount`() {
-        val cartItems = RealmList<CartItem>()
+        val cartItems = ArrayList<CartItem>()
         cartItems.add(CartItem("SHAMPOO", 20))
         Mockito.`when`(storage.loadCart()).thenReturn(Cart(cartItems))
         // 35.5 * 20
@@ -86,7 +85,7 @@ class FullBasketTests {
 
     @Test
     fun `two lipsticks and a shampoo`() {
-        val cartItems = RealmList<CartItem>()
+        val cartItems = ArrayList<CartItem>()
         cartItems.add(CartItem("LIPSTICK", 2))
         cartItems.add(CartItem("SHAMPOO", 1))
         Mockito.`when`(storage.loadCart()).thenReturn(Cart(cartItems))
@@ -98,7 +97,7 @@ class FullBasketTests {
 
     @Test
     fun `two lipsticks and an eyeliner`() {
-        val cartItems = RealmList<CartItem>()
+        val cartItems = ArrayList<CartItem>()
         cartItems.add(CartItem("LIPSTICK", 2))
         cartItems.add(CartItem("EYELINER", 1))
         Mockito.`when`(storage.loadCart()).thenReturn(Cart(cartItems))
@@ -110,7 +109,7 @@ class FullBasketTests {
 
     @Test
     fun `one lipstick and four eyeliners`() {
-        val cartItems = RealmList<CartItem>()
+        val cartItems = ArrayList<CartItem>()
         cartItems.add(CartItem("LIPSTICK", 1))
         cartItems.add(CartItem("EYELINER", 4))
         Mockito.`when`(storage.loadCart()).thenReturn(Cart(cartItems))
@@ -122,7 +121,7 @@ class FullBasketTests {
 
     @Test
     fun `three lipsticks, three eyeliners and one shampoo`() {
-        val cartItems = RealmList<CartItem>()
+        val cartItems = ArrayList<CartItem>()
         cartItems.add(CartItem("LIPSTICK", 3))
         cartItems.add(CartItem("SHAMPOO", 1))
         cartItems.add(CartItem("EYELINER", 3))

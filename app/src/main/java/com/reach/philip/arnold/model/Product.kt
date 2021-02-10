@@ -1,16 +1,15 @@
 package com.reach.philip.arnold.model
 
-import com.reach.philip.arnold.utils.NumberFormatter.formatNumber
-import io.realm.RealmObject
+import com.reach.philip.arnold.utils.NumberFormatter
 import java.util.*
 
-open class Product(
+data class Product(
     var id: String = "",
     var name: String = "",
     var price: Double = 0.0,
     var image: String? = null,
-): RealmObject() {
+) {
     fun formatPrice(): String {
-        return formatNumber(Locale.getDefault(), price)
+        return NumberFormatter.formatNumber(Locale.getDefault(), price)
     }
 }

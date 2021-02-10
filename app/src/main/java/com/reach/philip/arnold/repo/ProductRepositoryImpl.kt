@@ -7,7 +7,6 @@ import com.reach.philip.arnold.api.UseCaseResult
 import com.reach.philip.arnold.model.CartItem
 import com.reach.philip.arnold.model.Product
 import com.reach.philip.arnold.model.Products
-import io.realm.RealmList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -51,7 +50,7 @@ class ProductRepositoryImpl(private val storageRepo: StorageRepository, val api:
     }
 
     override fun saveProducts(products: List<Product>) {
-        val prods = RealmList<Product>().apply {
+        val prods = ArrayList<Product>().apply {
             addAll(products)
         }
         storageRepo.saveProductList(prods)

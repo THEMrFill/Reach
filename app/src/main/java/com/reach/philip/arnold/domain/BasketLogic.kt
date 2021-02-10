@@ -1,11 +1,10 @@
 package com.reach.philip.arnold.domain
 
 import com.reach.philip.arnold.model.*
-import io.realm.RealmList
 
 object BasketLogic {
     fun calcTotal(discounts: List<Discount>,
-                  products: RealmList<Product>,
+                  products: ArrayList<Product>,
                   cart: Cart
     ): CartTotal {
         val total = CartTotal()
